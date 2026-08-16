@@ -21,9 +21,6 @@ handle_input_locally = false
 size = Vector2i(500, 720)
 render_target_update_mode = 4
 
-[node name="Camera2D" type="Camera2D" parent="HackingViewportContainer/SubViewport" unique_id=453701003]
-position = Vector2(250, 360)
-
 [node name="HackingScene" parent="HackingViewportContainer/SubViewport" unique_id=589704455 instance=ExtResource("1_mq5dk")]
 
 [node name="PlatformViewportContainer" type="SubViewportContainer" parent="." unique_id=2113747998]

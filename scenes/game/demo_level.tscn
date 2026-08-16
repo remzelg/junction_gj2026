@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bd44oewm2jxw2"]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_tpval"]
-[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/character.tscn" id="2_oh7vw"]
+[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/player.tscn" id="2_oh7vw"]
 [ext_resource type="Script" uid="uid://d2akx0tguog5q" path="res://scenes/game/scripts/tutorial_manager.gd" id="2_xdrhe"]
 [ext_resource type="PackedScene" uid="uid://bd0fjo41vvvil" path="res://scenes/game/tutorials/tutorial_2.tscn" id="3_oh7vw"]
 

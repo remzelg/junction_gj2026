@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdh3thu6g6aad"
-path="res://.godot/imported/Git-Logo-2Color.png-73dc9fbbc7cfea42d3822db2a14ed5bd.ctex"
+uid="uid://c45o60c0lpk8m"
+path="res://.godot/imported/crouch.png-7ee00c0202132e84ee71c4976930ca8b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/git_logo/Git-Logo-2Color.png"
-dest_files=["res://.godot/imported/Git-Logo-2Color.png-73dc9fbbc7cfea42d3822db2a14ed5bd.ctex"]
+source_file="res://assets/player/crouch.png"
+dest_files=["res://.godot/imported/crouch.png-7ee00c0202132e84ee71c4976930ca8b.ctex"]
 
 [params]
 

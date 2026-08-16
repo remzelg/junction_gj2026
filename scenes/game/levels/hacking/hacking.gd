@@ -1,6 +1,9 @@
 extends Node2D
 class_name HackingScene
 
+signal node_triggered(number: int)
+signal all_nodes_triggered
+
 const COLS := 5
 const ROWS := 3
 const COL_X := [160.0, 400.0, 640.0, 880.0, 1120.0]

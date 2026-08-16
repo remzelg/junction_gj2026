@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ciu8u7wva1dbu"]
+
+[ext_resource type="Shader" uid="uid://ulespiqujwyx" path="res://assets/shaders/shockwave.gdshader" id="1_lgxtm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ixai"]
+resource_local_to_scene = true
+shader = ExtResource("1_lgxtm")
+shader_parameter/ping_color = Color(0, 1, 0.8, 1)
+shader_parameter/speed = 5.0
+shader_parameter/frequency = 12.506000546535
+shader_parameter/spawn_time = 0.0
+shader_parameter/phase_offset = 0.0
+
+[node name="Node2D" type="Node2D" unique_id=1875792673]
+z_index = -1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1255382239]
+material = SubResource("ShaderMaterial_6ixai")
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0

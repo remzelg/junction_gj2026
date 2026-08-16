@@ -1,8 +1,9 @@
 extends Sprite2D
 
-const SPEED := 300.0
-const HACK_RADIUS := 26.0
+const SPEED := 200.0
+const HACK_RADIUS := 40.0
 const START_INDEX := 5 # row 1, col 0
+const PingScene := preload("res://scenes/game/levels/hacking/ping.tscn")
 
 @onready var hacking_scene: HackingScene = owner
 
@@ -23,6 +24,7 @@ func _process(delta: float) -> void:
 	_read_input()
 	_move(delta)
 	if Input.is_action_just_pressed("ui_accept"):
+		_spawn_ping()
 		_try_hack()
 
 func _animate() -> void:
@@ -76,10 +78,21 @@ func _try_leave_node() -> void:
 	else:
 		target_index = current_index
 
+func _spawn_ping() -> void:
+	var ping := PingScene.instantiate()
+	add_child(ping)
+	ping.get_node("ColorRect").material.set_shader_parameter("spawn_time", Time.get_ticks_msec() / 1000.0)
+	get_tree().create_timer(0.85).timeout.connect(ping.queue_free)
+
 func _try_hack() -> void:
 	for node in hacking_scene.grid_nodes:
 		if node.is_target and not node.hacked and node.position.distance_to(position) <= HACK_RADIUS:
+			$AudioStreamPlayer2D.stream = load("res://assets/sound/success_2.wav")
+			$AudioStreamPlayer2D.play()
 			node.hack()
 			hacked_count += 1
 			hacking_scene.update_status(hacked_count)
+			hacking_scene.node_triggered.emit(node.number)
+			if hacked_count >= hacking_scene.target_count:
+				hacking_scene.all_nodes_triggered.emit()
 			return

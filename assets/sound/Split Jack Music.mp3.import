@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bujqx2m5wkne6"
+path="res://.godot/imported/Split Jack Music.mp3-8661431da769c3324501ef6a7eea0ce2.mp3str"
+
+[deps]
+
+source_file="res://assets/sound/Split Jack Music.mp3"
+dest_files=["res://.godot/imported/Split Jack Music.mp3-8661431da769c3324501ef6a7eea0ce2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

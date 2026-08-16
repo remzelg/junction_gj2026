@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cha1lfbhg463k"]
+
+[ext_resource type="Script" uid="uid://cfn2hrrex2c2u" path="res://scenes/game/levels/hacking/door.gd" id="1_hlyth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ixai"]
+size = Vector2(42, 216)
+
+[node name="Door" type="Node2D" unique_id=1143174641]
+script = ExtResource("1_hlyth")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=406963147]
+offset_right = 32.0
+offset_bottom = 96.0
+color = Color(0.28778407, 0.28778407, 0.28778407, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=491230341]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1293386830]
+position = Vector2(11, 28)
+shape = SubResource("RectangleShape2D_6ixai")

@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://bpvkeb7n6e4pn"]
+
+[ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_tpval"]
+[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/player.tscn" id="2_oh7vw"]
+[ext_resource type="Texture2D" uid="uid://bkhobv0gy7y1o" path="res://assets/backgrounds/City Ruins/city_ruins_0.png" id="4_bg0"]
+[ext_resource type="Texture2D" uid="uid://c0xouqx06rkq1" path="res://assets/backgrounds/City Ruins/city_ruins_1.png" id="5_bg1"]
+[ext_resource type="Texture2D" uid="uid://cuwmjh3vs8ij0" path="res://assets/backgrounds/City Ruins/city_ruins_2.png" id="6_bg2"]
+[ext_resource type="Script" uid="uid://bw0gw0edhi6lh" path="res://scenes/game/collision_polygon_2d.gd" id="6_v221m"]
+[ext_resource type="Texture2D" uid="uid://xkb4ublt1uk" path="res://assets/backgrounds/City Ruins/city_ruins_3.png" id="7_bg3"]
+[ext_resource type="PackedScene" uid="uid://cha1lfbhg463k" path="res://scenes/game/levels/hacking/door.tscn" id="8_door1"]
+[ext_resource type="Script" uid="uid://7x1a5kvhtph" path="res://scenes/game/levels/hacking/complete_marker.gd" id="9_complete1"]
+
+[node name="DemoLevel" type="Node2D" unique_id=1269593968]
+script = ExtResource("1_tpval")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=3001]
+layer = -1
+
+[node name="Sky" type="ParallaxLayer" parent="ParallaxBackground" unique_id=3002]
+motion_scale = Vector2(0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Sky" unique_id=3003]
+texture_filter = 1
+position = Vector2(390, 360)
+scale = Vector2(7, 7)
+texture = ExtResource("4_bg0")
+
+[node name="Far" type="ParallaxLayer" parent="ParallaxBackground" unique_id=3004]
+motion_scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Far" unique_id=3005]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-100, -48)
+scale = Vector2(6, 6)
+texture = ExtResource("5_bg1")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 128)
+
+[node name="Mid" type="ParallaxLayer" parent="ParallaxBackground" unique_id=3006]
+motion_scale = Vector2(0.55, 0.55)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mid" unique_id=3007]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-100, -48)
+scale = Vector2(6, 6)
+texture = ExtResource("6_bg2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 128)
+
+[node name="Near" type="ParallaxLayer" parent="ParallaxBackground" unique_id=3008]
+motion_scale = Vector2(0.8, 0.8)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Near" unique_id=3009]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-100, -48)
+scale = Vector2(6, 6)
+texture = ExtResource("7_bg3")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 128)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=864701993]
+position = Vector2(0, 176)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=435447630]
+scale = Vector2(2.859841, 2.3099751)
+polygon = PackedVector2Array(40, 0, 40, 0, 40, 216, 104, 216, 195.81506, 214.72092, 232.18071, 214.72092, 271.34372, 214.72092, 268.69067, 200.73236, 304.91202, 193.9415, 344, 176, 346.8724, 162.77231, 358.06183, 162.77231, 360, 176, 494.08337, 219.04999, 491.98535, -52.38151, 1203.913, 316.4536, 0, 312, 0, 8)
+script = ExtResource("6_v221m")
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D" unique_id=1751075990]
+
+[node name="Door" parent="." unique_id=4200 instance=ExtResource("8_door1")]
+position = Vector2(420, 536)
+
+[node name="CompleteMarker" type="Node2D" parent="." unique_id=4201]
+position = Vector2(1241, 573)
+script = ExtResource("9_complete1")
+
+[node name="Character" parent="." unique_id=1031860787 instance=ExtResource("2_oh7vw")]
+position = Vector2(144, 432)
+
+[node name="Camera2D" type="Camera2D" parent="Character" unique_id=3200]
+limit_left = 0
+limit_top = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.6667
+drag_top_margin = 1.0
+drag_right_margin = 0.0
+drag_bottom_margin = 1.0

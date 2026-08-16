@@ -15,6 +15,10 @@ run/main_scene="res://scenes/opening/opening.tscn"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="uid://dlo5inop6ahho"
+
 [autoload]
 
 InputGlobal="*uid://ddio3y2k7o32k"

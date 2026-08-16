@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://yqn31o6glids"]
+
+[ext_resource type="Texture2D" uid="uid://cf4y6ic2xm1yh" path="res://assets/octahedron-ezgif.com-gif-to-sprite-converter.png" id="1_3p80y"]
+[ext_resource type="Script" uid="uid://bjctvafichkc8" path="res://scenes/game/levels/hacking/hacking_indicator.gd" id="2_5h0mq"]
+
+[node name="HackingIndicator" type="Sprite2D" unique_id=170773584]
+z_index = 1
+texture = ExtResource("1_3p80y")
+hframes = 5
+vframes = 34
+script = ExtResource("2_5h0mq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1138342479]
+zoom = Vector2(0.7, 0.7)
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1710380469]

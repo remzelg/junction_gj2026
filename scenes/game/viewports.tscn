@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://uoi5m628q7rc"]
+
+[ext_resource type="PackedScene" uid="uid://bd44oewm2jxw2" path="res://scenes/game/demo_level.tscn" id="1_3udjt"]
+[ext_resource type="PackedScene" uid="uid://dm10kmxh3j6u8" path="res://scenes/game/levels/hacking/hacking.tscn" id="1_mq5dk"]
+
+[node name="ViewportControl" type="Control" unique_id=1411216716]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HackingViewportContainer" type="SubViewportContainer" parent="." unique_id=463490265]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="SubViewport" type="SubViewport" parent="HackingViewportContainer" unique_id=640415195]
+handle_input_locally = false
+size = Vector2i(500, 720)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="HackingViewportContainer/SubViewport" unique_id=453701003]
+position = Vector2(250, 360)
+
+[node name="HackingScene" parent="HackingViewportContainer/SubViewport" unique_id=589704455 instance=ExtResource("1_mq5dk")]
+
+[node name="PlatformViewportContainer" type="SubViewportContainer" parent="." unique_id=2113747998]
+layout_mode = 0
+offset_left = 500.0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="SubViewport" type="SubViewport" parent="PlatformViewportContainer" unique_id=149828992]
+handle_input_locally = false
+size = Vector2i(780, 720)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="PlatformViewportContainer/SubViewport" unique_id=74191948]
+position = Vector2(390, 360)
+
+[node name="DemoLevel" parent="PlatformViewportContainer/SubViewport" unique_id=1639080091 instance=ExtResource("1_3udjt")]

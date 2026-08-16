@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dm10kmxh3j6u8"]
+
+[ext_resource type="Script" uid="uid://dg43w6ii43u0t" path="res://scenes/game/levels/hacking/hacking.gd" id="1_d2qrb"]
+[ext_resource type="Shader" uid="uid://858bsfrsmvdp" path="res://scenes/game/rippling.gdshader" id="2_0yufy"]
+[ext_resource type="Script" uid="uid://ewkd8a7odrac" path="res://scenes/game/rippling_rect.gd" id="2_qf1ua"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yufy"]
+shader = ExtResource("2_0yufy")
+shader_parameter/strength = 0.08
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.414000019665
+shader_parameter/aberration = 0.3130000148675
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.135
+
+[node name="HackingScene" type="Node2D" unique_id=589704455]
+script = ExtResource("1_d2qrb")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2104676926]
+visible = false
+offset_right = 500.0
+offset_bottom = 720.0
+color = Color(0.08701607, 0.08701607, 0.08701607, 1)
+
+[node name="Label" type="Label" parent="." unique_id=2083916110]
+offset_left = 224.0
+offset_top = 344.0
+offset_right = 291.0
+offset_bottom = 367.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Hacking!"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1411455847]
+material = SubResource("ShaderMaterial_0yufy")
+offset_left = 184.0
+offset_top = 456.0
+offset_right = 224.0
+offset_bottom = 496.0
+scale = Vector2(3.4801612, 3.4801612)
+color = Color(0.15344173, 0.41666013, 0.66160864, 1)
+script = ExtResource("2_qf1ua")

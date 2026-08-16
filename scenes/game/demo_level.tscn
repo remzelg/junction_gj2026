@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bd44oewm2jxw2"]
+
+[ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_tpval"]
+[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/character.tscn" id="2_oh7vw"]
+[ext_resource type="Script" uid="uid://d2akx0tguog5q" path="res://scenes/game/scripts/tutorial_manager.gd" id="2_xdrhe"]
+[ext_resource type="PackedScene" uid="uid://bd0fjo41vvvil" path="res://scenes/game/tutorials/tutorial_2.tscn" id="3_oh7vw"]
+
+[node name="DemoLevel" type="Node2D" unique_id=1269593968]
+script = ExtResource("1_tpval")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=864701993]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=435447630]
+scale = Vector2(2.859841, 2.3099751)
+polygon = PackedVector2Array(40, 0, 40, 0, 40, 216, 104, 216, 200, 176, 208, 216, 256, 216, 264, 176, 344, 176, 344, 136, 360, 136, 360, 176, 384, 208, 448, 208, 448, 312, 0, 312, 0, 8)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D" unique_id=1751075990]
+scale = Vector2(1.1370068, 1.0821717)
+
+[node name="Character" parent="." unique_id=1031860787 instance=ExtResource("2_oh7vw")]
+position = Vector2(144, 432)
+
+[node name="TutorialManager" type="Node" parent="." unique_id=1712859042]
+unique_name_in_owner = true
+script = ExtResource("2_xdrhe")
+tutorial_scenes = Array[PackedScene]([ExtResource("3_oh7vw")])

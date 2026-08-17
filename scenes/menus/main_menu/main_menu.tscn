@@ -25,14 +25,18 @@ offset_bottom = 38.0
 scale = Vector2(24.284607, 14.83709)
 
 [node name="BackgroundTextureRect" parent="." index="1" unique_id=1025367827]
-offset_top = -55.0
-offset_right = 196.0
-offset_bottom = 66.0
+offset_left = 5.0
+offset_top = -78.0
+offset_right = 201.0
+offset_bottom = 43.0
 scale = Vector2(1.3188184, 1.3188184)
 texture = ExtResource("5_ub2bi")
 
 [node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" parent_id_path=PackedInt32Array(704939549) index="0" unique_id=334107926]
 text = "Split Jack"
+
+[node name="SubTitleLabel" parent="MenuContainer/SubTitleMargin/SubTitleContainer" parent_id_path=PackedInt32Array(523889664) index="0" unique_id=754291424]
+text = ""
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="5" unique_id=236243186]
 position = Vector2(156, 198)

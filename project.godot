@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Split Jack"
-run/main_scene="res://scenes/opening/opening.tscn"
+run/main_scene="uid://cd34ulb1ljvc5"
 config/features=PackedStringArray("4.7")
 config/icon="res://icon.png"
 

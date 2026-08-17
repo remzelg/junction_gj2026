@@ -2,18 +2,37 @@ extends Sprite2D
 
 const SPEED := 200.0
 const HACK_RADIUS := 40.0
-const START_INDEX := 5 # row 1, col 0
 const PingScene := preload("res://scenes/game/levels/hacking/ping.tscn")
+## Extra room beyond the outermost node positions the camera is allowed to
+## pan into, so edge nodes aren't pressed right up against the viewport edge.
+const CAMERA_MARGIN := 120.0
 
 @onready var hacking_scene: HackingScene = owner
+@onready var camera: Camera2D = $Camera2D
 
-var current_index := START_INDEX
-var target_index := START_INDEX
+var current_index := 0
+var target_index := 0
 var current_direction := Vector2.ZERO
 var queued_direction := Vector2.ZERO
 var hacked_count := 0
 
 var _positioned := false
+
+func _ready() -> void:
+	current_index = hacking_scene.start_index
+	target_index = current_index
+	_configure_camera()
+
+# The camera's pan limits are hardcoded in hacking_indicator.tscn, sized for
+# the original single grid layout. Since each level now defines its own
+# graph (possibly larger or differently shaped), size them here instead from
+# this level's actual node bounds so nothing ends up unreachable off-screen.
+func _configure_camera() -> void:
+	var bounds := hacking_scene.get_graph_bounds().grow(CAMERA_MARGIN)
+	camera.limit_left = int(bounds.position.x)
+	camera.limit_top = int(bounds.position.y)
+	camera.limit_right = int(bounds.position.x + bounds.size.x)
+	camera.limit_bottom = int(bounds.position.y + bounds.size.y)
 
 func _process(delta: float) -> void:
 	if not _positioned:
@@ -86,7 +105,7 @@ func _spawn_ping() -> void:
 
 func _try_hack() -> void:
 	for node in hacking_scene.grid_nodes:
-		if node.is_target and not node.hacked and node.position.distance_to(position) <= HACK_RADIUS:
+		if node.can_hack() and node.position.distance_to(position) <= HACK_RADIUS:
 			$AudioStreamPlayer2D.stream = load("res://assets/sound/success_2.wav")
 			$AudioStreamPlayer2D.play()
 			node.hack()

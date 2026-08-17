@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://bbymrin0cm704" path="res://addons/maaacks_game_template/extras/scripts/level_loader.gd" id="3_tt8ce"]
 [ext_resource type="Script" uid="uid://bllg4gg7v1tsr" path="res://addons/maaacks_game_template/extras/scripts/level_manager.gd" id="4_w6dhj"]
 [ext_resource type="PackedScene" uid="uid://c2o58baew6sqw" path="res://scenes/windows/game_won_window.tscn" id="5_8yuu4"]
-[ext_resource type="PackedScene" uid="uid://c6edvfni5n6uu" path="res://scenes/windows/level_lost_window.tscn" id="6_48bbn"]
 [ext_resource type="PackedScene" uid="uid://bnmwccmxfg6ym" path="res://scenes/windows/level_won_window.tscn" id="7_mllto"]
 [ext_resource type="Script" uid="uid://wjq7li836lwj" path="res://addons/maaacks_game_template/extras/scripts/scene_lister.gd" id="8_dh7ef"]
 [ext_resource type="Script" uid="uid://cq8demlx34qtp" path="res://scenes/game/scripts/configurable_sub_viewport.gd" id="9_c3obe"]
@@ -28,7 +27,6 @@ scene_lister = NodePath("SceneLister")
 main_menu_scene_path = "res://scenes/menus/main_menu/main_menu.tscn"
 ending_scene_path = "res://scenes/end_credits/end_credits.tscn"
 game_won_scene = ExtResource("5_8yuu4")
-level_lost_scene = ExtResource("6_48bbn")
 level_won_scene = ExtResource("7_mllto")
 
 [node name="SceneLister" type="Node" parent="LevelManager" unique_id=673614733]

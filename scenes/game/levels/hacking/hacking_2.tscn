@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://gygq7y0315dn"]
 
-[ext_resource type="Script" uid="uid://dg43w6ii43u0t" path="res://scenes/game/levels/hacking/hacking.gd" id="1_d2qrb"]
+[ext_resource type="Script" uid="uid://bk4nsk8xrv4ql" path="res://scenes/game/levels/hacking/hacking_2.gd" id="1_d2qrb"]
 [ext_resource type="Texture2D" uid="uid://c082quo2tosjr" path="res://assets/backgrounds/Matrix/matrix_1.png" id="5_bg1"]
 [ext_resource type="PackedScene" uid="uid://yqn31o6glids" path="res://scenes/game/levels/hacking/hacking_indicator.tscn" id="5_lg5yy"]
 [ext_resource type="Texture2D" uid="uid://bbdgo526kl5sw" path="res://assets/backgrounds/Matrix/matrix_2.png" id="6_bg2"]

@@ -1,8 +1,8 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_x2ody"]
-[ext_resource type="PackedScene" path="res://scenes/game/levels/hacking/hacking_2.tscn" id="6_hack2"]
-[ext_resource type="PackedScene" path="res://scenes/game/demo_level_2.tscn" id="7_demo2"]
+[ext_resource type="PackedScene" uid="uid://gygq7y0315dn" path="res://scenes/game/levels/hacking/hacking_2.tscn" id="6_hack2"]
+[ext_resource type="PackedScene" path="res://scenes/game/levels/platform/platform_level_2.tscn" id="7_demo2"]
 
 [node name="Level2" type="Control" unique_id=99694805]
 layout_mode = 3
@@ -54,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 16
-text = "WASD: move hacking drone    |    Arrow Keys: move player    |    Space: jump / trigger node"
+text = "WASD: move hacking drone    |    Arrow Keys: move player    |    Space: jump / trigger node    |    E: trigger mine"
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://uoi5m628q7rc"]
 
-[ext_resource type="PackedScene" uid="uid://bd44oewm2jxw2" path="res://scenes/game/demo_level.tscn" id="1_3udjt"]
+[ext_resource type="PackedScene" uid="uid://bd44oewm2jxw2" path="res://scenes/game/levels/platform/platform_level.tscn" id="1_3udjt"]
 [ext_resource type="PackedScene" uid="uid://dm10kmxh3j6u8" path="res://scenes/game/levels/hacking/hacking.tscn" id="1_mq5dk"]
 [ext_resource type="AudioStream" uid="uid://bujqx2m5wkne6" path="res://assets/sound/Split Jack Music.mp3" id="3_25hyx"]
 [ext_resource type="Script" uid="uid://ctk4fd0bw3pix" path="res://scenes/game/audio_stream_player_2d.gd" id="4_htenw"]

@@ -4,75 +4,126 @@ class_name HackingScene
 signal node_triggered(number: int)
 signal all_nodes_triggered
 
-const COLS := 5
-const ROWS := 3
-const COL_X := [160.0, 400.0, 640.0, 880.0, 1120.0]
-const ROW_Y := [180.0, 360.0, 540.0]
+## Generic graph engine: layout data (positions, connections, targets) is
+## supplied by a per-level subclass (see hacking_1.gd / hacking_2.gd /
+## hacking_3.gd) instead of being hardcoded here, so each level can use its
+## own — possibly asymmetric — formation of nodes instead of a fixed grid.
 
-# grid index (row * COLS + col) -> displayed number for red/target nodes
-const TARGET_NUMBERS := {
-	1: 1, # row 0, col 1
-	3: 2, # row 0, col 3
-	6: 3, # row 1, col 1
-	8: 4, # row 1, col 3
-	12: 5, # row 2, col 2
-}
+## Local-space position of each graph node, indexed 0..N-1.
+var node_positions: Array[Vector2] = []
+## Undirected connections between node_positions indices. Only these pairs
+## are drawn as edges and navigable by the hacking indicator.
+var edges: Array[Vector2i] = []
+## node_positions index -> displayed number, for red/target nodes.
+var target_numbers: Dictionary = {}
+## node_positions index where the hacking indicator spawns.
+var start_index: int = 0
+## node_positions index -> displayed number, for rocket-jump marker nodes.
+## Mirrors target_numbers, but these aren't hackable and don't count toward
+## completion — each is a numbered, proximity-tinted marker for a matching
+## RocketJump mine (by its own target_number) in the platform level.
+var rocket_numbers: Dictionary = {}
 
 @onready var status_label: Label = $UI/StatusLabel
 @onready var graph_nodes_container: Node2D = $HackingLevel/GraphNodes
 
-var grid_nodes: Array = [] # flat array of HackingGraphNode, index = row * COLS + col
+var grid_nodes: Array = [] # flat array of HackingGraphNode, index matches node_positions
 var target_count := 0
+var _adjacency: Dictionary = {} # node index -> Array[int] of connected neighbor indices
 
 func _ready() -> void:
-	_build_grid()
+	_build_graph()
 	update_status(0)
 	queue_redraw()
 
-func _build_grid() -> void:
-	for row in ROWS:
-		for col in COLS:
-			var index := row * COLS + col
-			var node := HackingGraphNode.new()
-			node.position = Vector2(COL_X[col], ROW_Y[row])
-			if TARGET_NUMBERS.has(index):
-				node.is_target = true
-				node.number = TARGET_NUMBERS[index]
-				target_count += 1
-			graph_nodes_container.add_child(node)
-			grid_nodes.append(node)
+func _build_graph() -> void:
+	for i in node_positions.size():
+		var node := HackingGraphNode.new()
+		node.position = node_positions[i]
+		if target_numbers.has(i):
+			node.is_target = true
+			node.number = target_numbers[i]
+			target_count += 1
+		elif rocket_numbers.has(i):
+			node.is_rocket = true
+			node.number = rocket_numbers[i]
+		elif i == start_index:
+			node.is_start = true
+		graph_nodes_container.add_child(node)
+		grid_nodes.append(node)
+		_adjacency[i] = []
+	for edge in edges:
+		_adjacency[edge.x].append(edge.y)
+		_adjacency[edge.y].append(edge.x)
 
 func _draw() -> void:
-	for row in ROWS:
-		for col in COLS:
-			var index := row * COLS + col
-			if col + 1 < COLS:
-				_draw_edge(index, index + 1)
-			if row + 1 < ROWS:
-				_draw_edge(index, index + COLS)
+	for edge in edges:
+		_draw_edge(edge.x, edge.y)
+
+const EDGE_COLOR := Color(0.42, 0.45, 0.52)
+const EDGE_WIDTH := 3.0
 
 func _draw_edge(a_index: int, b_index: int) -> void:
 	if grid_nodes.is_empty():
 		return
-	var a := to_local(grid_nodes[a_index].global_position)
-	var b := to_local(grid_nodes[b_index].global_position)
-	draw_line(a, b, Color(0.4, 0.42, 0.48), 3.0)
+	var node_a: HackingGraphNode = grid_nodes[a_index]
+	var node_b: HackingGraphNode = grid_nodes[b_index]
+	var a := to_local(node_a.global_position)
+	var b := to_local(node_b.global_position)
+	var dir := (b - a).normalized()
+	# All nodes are hollow shapes, so stop the line at each one's border
+	# instead of running it through the transparent center.
+	a += dir * node_a.edge_clip_distance()
+	b -= dir * node_b.edge_clip_distance()
+	draw_line(a, b, EDGE_COLOR, EDGE_WIDTH)
+
+func get_target_node(number: int) -> HackingGraphNode:
+	for node in grid_nodes:
+		if node.is_target and node.number == number:
+			return node
+	return null
+
+func get_rocket_node(number: int) -> HackingGraphNode:
+	for node in grid_nodes:
+		if node.is_rocket and node.number == number:
+			return node
+	return null
+
+## Bounding box of every node's position — used by the hacking indicator to
+## size its camera's pan limits to whatever this level's layout actually
+## covers, instead of a one-size-fits-all constant.
+func get_graph_bounds() -> Rect2:
+	if node_positions.is_empty():
+		return Rect2()
+	var min_x := node_positions[0].x
+	var min_y := node_positions[0].y
+	var max_x := min_x
+	var max_y := min_y
+	for pos in node_positions:
+		min_x = min(min_x, pos.x)
+		min_y = min(min_y, pos.y)
+		max_x = max(max_x, pos.x)
+		max_y = max(max_y, pos.y)
+	return Rect2(Vector2(min_x, min_y), Vector2(max_x - min_x, max_y - min_y))
 
 # Grid query API used by the hacking indicator (the "player") to navigate.
+# Picks whichever edge-connected neighbor is most closely aligned with the
+# pressed compass direction, so movement works over any graph shape — not
+# just an axis-aligned row/col lattice.
+const DIRECTION_ALIGNMENT_THRESHOLD := 0.4
+
 func neighbor_index(index: int, direction: Vector2) -> int:
-	var row := index / COLS
-	var col := index % COLS
-	if direction == Vector2.UP:
-		row -= 1
-	elif direction == Vector2.DOWN:
-		row += 1
-	elif direction == Vector2.LEFT:
-		col -= 1
-	elif direction == Vector2.RIGHT:
-		col += 1
-	if row < 0 or row >= ROWS or col < 0 or col >= COLS:
+	if direction == Vector2.ZERO:
 		return -1
-	return row * COLS + col
+	var best_index := -1
+	var best_dot := DIRECTION_ALIGNMENT_THRESHOLD
+	for neighbor in _adjacency.get(index, []):
+		var delta: Vector2 = grid_nodes[neighbor].position - grid_nodes[index].position
+		var dot := delta.normalized().dot(direction)
+		if dot > best_dot:
+			best_dot = dot
+			best_index = neighbor
+	return best_index
 
 func direction_valid(index: int, direction: Vector2) -> bool:
 	return direction != Vector2.ZERO and neighbor_index(index, direction) != -1

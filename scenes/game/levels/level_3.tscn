@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bacskq5r1n48j"]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_2ipf5"]
-[ext_resource type="PackedScene" path="res://scenes/game/levels/hacking/hacking_3.tscn" id="6_hack3"]
-[ext_resource type="PackedScene" path="res://scenes/game/demo_level_3.tscn" id="7_demo3"]
+[ext_resource type="PackedScene" uid="uid://dk3d74d7n5csq" path="res://scenes/game/levels/hacking/hacking_3.tscn" id="6_hack3"]
+[ext_resource type="PackedScene" path="res://scenes/game/levels/platform/platform_level_3.tscn" id="7_demo3"]
 
 [node name="Level3" type="Control" unique_id=224248898]
 layout_mode = 3

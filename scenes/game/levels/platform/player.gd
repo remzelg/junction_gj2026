@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal lost_level
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const SLIDE_MIN_SPEED = 150.0
@@ -84,3 +86,12 @@ func set_crouch_held() -> void:
 func set_facing(direction: Facing) -> void:
 	facing = direction
 	sprite.flip_h = facing == Facing.BACKWARD
+
+## Called by hazards (e.g. spikes) on contact with the player.
+func lose_level() -> void:
+	lost_level.emit()
+
+## Called by rocket-jump pads when they detonate near the player: overrides
+## the current velocity with the given launch impulse.
+func apply_rocket_launch(impulse: Vector2) -> void:
+	velocity = impulse

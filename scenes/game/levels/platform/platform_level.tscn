@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cid2eukgfcark"]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_tpval"]
-[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/player.tscn" id="2_oh7vw"]
+[ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/levels/platform/player.tscn" id="2_oh7vw"]
 [ext_resource type="Texture2D" uid="uid://bkhobv0gy7y1o" path="res://assets/backgrounds/City Ruins/city_ruins_0.png" id="4_bg0"]
 [ext_resource type="Texture2D" uid="uid://c0xouqx06rkq1" path="res://assets/backgrounds/City Ruins/city_ruins_1.png" id="5_bg1"]
 [ext_resource type="Texture2D" uid="uid://cuwmjh3vs8ij0" path="res://assets/backgrounds/City Ruins/city_ruins_2.png" id="6_bg2"]
@@ -76,13 +76,13 @@ script = ExtResource("6_v221m")
 position = Vector2(144, 432)
 
 [node name="Camera2D" type="Camera2D" parent="Character" unique_id=3200]
+offset = Vector2(0, -60)
 limit_left = 0
-limit_top = 0
+limit_top = 432
+limit_bottom = 432
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 drag_horizontal_enabled = true
-drag_vertical_enabled = true
+drag_vertical_enabled = false
 drag_left_margin = 0.6667
-drag_top_margin = 1.0
 drag_right_margin = 0.0
-drag_bottom_margin = 1.0

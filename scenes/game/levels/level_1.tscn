@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_kdlgo"]
 [ext_resource type="PackedScene" uid="uid://cgum6hao5k8do" path="res://scenes/game/levels/hacking/hacking_1.tscn" id="6_hack1"]
-[ext_resource type="PackedScene" uid="uid://bpvkeb7n6e4pn" path="res://scenes/game/demo_level_1.tscn" id="7_demo1"]
+[ext_resource type="PackedScene" uid="uid://bpvkeb7n6e4pn" path="res://scenes/game/levels/platform/platform_level_1.tscn" id="7_demo1"]
 
 [node name="Level1" type="Control" unique_id=578199311]
 layout_mode = 3

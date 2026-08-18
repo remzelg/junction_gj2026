@@ -87,16 +87,17 @@ color = Color(0.64705884, 0.16470589, 0.16470589, 1)
 
 [node name="TextEdit" type="TextEdit" parent="Building/CollisionPolygon2D2/Polygon2D" unique_id=712142647]
 offset_left = -0.6993395
-offset_top = 111.68951
-offset_right = 38.813354
-offset_bottom = 209.68951
-theme_override_font_sizes/font_size = 7
+offset_top = 96.10493
+offset_right = 39.862366
+offset_bottom = 227.68948
+theme_override_font_sizes/font_size = 9
 text = "Trigger
 All
 Nodes
 To
 Escape
 "
+autowrap_mode = 2
 scroll_fit_content_height = true
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=550201616]
@@ -126,14 +127,15 @@ position = Vector2(158, 653)
 offset = Vector2(0, -240)
 limit_left = 0
 limit_top = 0
+limit_bottom = 1000
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.6667
-drag_top_margin = 1.0
+drag_top_margin = 0.3
 drag_right_margin = 0.0
-drag_bottom_margin = 1.0
+drag_bottom_margin = 0.05
 
 [node name="Spike" parent="." unique_id=684218619 instance=ExtResource("10_thcrw")]
 position = Vector2(307, 591)

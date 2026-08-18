@@ -105,13 +105,21 @@ func _spawn_ping() -> void:
 
 func _try_hack() -> void:
 	for node in hacking_scene.grid_nodes:
-		if node.can_hack() and node.position.distance_to(position) <= HACK_RADIUS:
-			$AudioStreamPlayer2D.stream = load("res://assets/sound/success_2.wav")
-			$AudioStreamPlayer2D.play()
+		if node.position.distance_to(position) > HACK_RADIUS:
+			continue
+		if node.can_hack():
+			_play_success_sound()
 			node.hack()
 			hacked_count += 1
-			hacking_scene.update_status(hacked_count)
 			hacking_scene.node_triggered.emit(node.number)
 			if hacked_count >= hacking_scene.target_count:
 				hacking_scene.all_nodes_triggered.emit()
 			return
+		if node.can_trigger():
+			_play_success_sound()
+			hacking_scene.rocket_triggered.emit(node.number)
+			return
+
+func _play_success_sound() -> void:
+	$AudioStreamPlayer2D.stream = load("res://assets/sound/success_2.wav")
+	$AudioStreamPlayer2D.play()

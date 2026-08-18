@@ -3,8 +3,8 @@ extends HackingScene
 ## A much larger, non-tree formation: two junctions each fork up/down/right,
 ## and the far end closes into two loops (top and bottom) instead of
 ## dead-ending, so there's more than one route to some targets. Two doors
-## (target 1 and target 6) and one numbered rocket-jump marker (target 7)
-## are woven in. Every edge is still a pure horizontal or vertical run.
+## (target 1 and target 6) and two numbered rocket-jump markers (targets 7
+## and 8) are woven in. Every edge is still a pure horizontal or vertical run.
 func _init() -> void:
 	node_positions = [
 		Vector2(140, 360),  # 0: start
@@ -20,6 +20,7 @@ func _init() -> void:
 		Vector2(1340, 360), # 10: junction 3
 		Vector2(1340, 140), # 11: rocket marker (7)
 		Vector2(1340, 580), # 12: target 6 (door B)
+		Vector2(1580, 360), # 13: rocket marker (8)
 	]
 	edges = [
 		Vector2i(0, 1),
@@ -36,7 +37,8 @@ func _init() -> void:
 		Vector2i(10, 12),
 		Vector2i(7, 11), # closes the upper loop: 5-6-7-11-10-5
 		Vector2i(9, 12), # closes the lower loop: 5-8-9-12-10-5
+		Vector2i(10, 13),
 	]
 	target_numbers = {2: 2, 3: 3, 4: 1, 7: 4, 9: 5, 12: 6}
-	rocket_numbers = {11: 7}
+	rocket_numbers = {11: 7, 13: 8}
 	start_index = 0

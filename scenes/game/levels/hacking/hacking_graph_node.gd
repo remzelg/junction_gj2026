@@ -45,6 +45,14 @@ func set_proximity_active(value: bool) -> void:
 func can_hack() -> bool:
 	return is_target and not hacked and (not is_door or proximity_active)
 
+## Mirrors can_hack's door gating: triggerable only while the player is
+## physically near the linked mine (proximity_active), same as a door needing
+## the player at the door to be hackable. No "hacked" one-shot state to gate
+## on beyond that — the linked mine's own READY/ARMED/RESPAWNING state
+## decides whether a trigger actually does anything.
+func can_trigger() -> bool:
+	return is_rocket and proximity_active
+
 func _draw() -> void:
 	if is_target:
 		var color := _target_color()

@@ -1,11 +1,12 @@
 extends Area2D
 class_name RocketJump
 
-## A reusable mine. Press "interact" (E) while standing in range; after a
-## short fuse it detonates, flinging the player radially away from its
-## position, then goes inert for a few seconds before resetting so it can be
-## used again. Deliberately a separate action from "ui_accept" (Space), which
-## already does double duty for jumping and triggering hacking nodes.
+## A reusable mine. It can't be armed physically — level.gd calls trigger()
+## when the player hacks this mine's marker node in the hacking minigame
+## (see HackingScene.rocket_triggered). After a short fuse it detonates,
+## flinging the player radially away from its position (only if they're
+## within EXPLOSION_RADIUS of the mine when it goes off), then goes inert for
+## a few seconds before resetting so it can be triggered again.
 
 ## Which hacking-graph rocket-marker number this mine is paired with —
 ## mirrors Door.target_number, so a level can place several mines, each tied
@@ -15,6 +16,12 @@ class_name RocketJump
 const FUSE_DURATION := 0.5
 const RESPAWN_DELAY := 2.5
 const LAUNCH_STRENGTH := 900.0
+## Distance at detonation time within which a nearby body gets launched.
+## Separate from the (much larger) CollisionShape2D trigger radius — a
+## trigger can come from the hacking minigame while the player is far away,
+## but they have to actually be near the mine when the fuse runs out to
+## catch the blast.
+const EXPLOSION_RADIUS := 100.0
 
 const BODY_RADIUS := 20.0
 const SPIKE_COUNT := 8
@@ -27,9 +34,15 @@ const ARMED_COLOR := Color(1.0, 0.5, 0.2)
 enum State { READY, ARMED, RESPAWNING }
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var audio_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 var _state: State = State.READY
 var _highlighted := false
+## Whichever body is currently overlapping the trigger CollisionShape2D, kept
+## live via body_entered/exited — not a snapshot, since trigger() now fires
+## remotely (from the hacking minigame) rather than from this body's own
+## input, so there's no single "who pressed the button" to freeze at arm
+## time. Explosion checks this body's live position against EXPLOSION_RADIUS.
 var _body_in_range: Node2D = null
 
 func _ready() -> void:
@@ -52,8 +65,11 @@ func _on_body_exited(body: Node2D) -> void:
 	if body == _body_in_range:
 		_body_in_range = null
 
-func _process(_delta: float) -> void:
-	if _state == State.READY and _body_in_range and Input.is_action_just_pressed("interact"):
+## Called by level.gd when the player hacks this mine's marker node in the
+## hacking minigame. A no-op unless the mine is currently READY, so spamming
+## the marker while ARMED/RESPAWNING doesn't restart or stack the fuse.
+func trigger() -> void:
+	if _state == State.READY:
 		_arm()
 
 func _arm() -> void:
@@ -63,10 +79,13 @@ func _arm() -> void:
 	_explode()
 
 func _explode() -> void:
-	if _body_in_range:
+	audio_player.stream = load("res://assets/sound/bomb.wav")
+	audio_player.play()
+	if is_instance_valid(_body_in_range):
 		var away := _body_in_range.global_position - global_position
-		var direction := away.normalized() if away.length() > 0.001 else Vector2.UP
-		_body_in_range.apply_rocket_launch(direction * LAUNCH_STRENGTH)
+		if away.length() <= EXPLOSION_RADIUS:
+			var direction := away.normalized() if away.length() > 0.001 else Vector2.UP
+			_body_in_range.apply_rocket_launch(direction * LAUNCH_STRENGTH)
 	visible = false
 	collision_shape.set_deferred("disabled", true)
 	_state = State.RESPAWNING

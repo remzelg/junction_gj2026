@@ -77,8 +77,17 @@ script = ExtResource("6_v221m")
 [node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D" unique_id=1751075990]
 color = Color(0.64705884, 0.16470589, 0.16470589, 1)
 
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Building/CollisionPolygon2D" unique_id=1885504990]
+position = Vector2(547.5829, -347.62274)
+scale = Vector2(2.859841, 2.3099751)
+polygon = PackedVector2Array(27.510513, 97.451546, 36.68068, 146.73955, 37.90338, 238.19409, 19.685303, 237.25703, 19.07396, 146.17732)
+script = ExtResource("6_v221m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D/CollisionPolygon2D" unique_id=1573743054]
+color = Color(0.64705884, 0.16470589, 0.16470589, 1)
+
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Building" unique_id=573161881]
-position = Vector2(1401, 51)
+position = Vector2(3783.9998, 100)
 scale = Vector2(2.859841, 2.3099751)
 polygon = PackedVector2Array(40, 0, 40, 0, 39.163013, 234.20166, -1.0490093, 234.20166, 0, 8)
 script = ExtResource("6_v221m")
@@ -86,27 +95,13 @@ script = ExtResource("6_v221m")
 [node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D2" unique_id=104257376]
 color = Color(0.64705884, 0.16470589, 0.16470589, 1)
 
-[node name="TextEdit" type="TextEdit" parent="Building/CollisionPolygon2D2/Polygon2D" unique_id=712142647]
-offset_left = -0.6993395
-offset_top = 111.68951
-offset_right = 38.813354
-offset_bottom = 209.68951
-theme_override_font_sizes/font_size = 7
-text = "Trigger
-All
-Nodes
-To
-Escape
-"
-scroll_fit_content_height = true
-
 [node name="Floor" type="StaticBody2D" parent="." unique_id=550201616]
 position = Vector2(0, 176)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor" unique_id=309736704]
 position = Vector2(87, 524)
 scale = Vector2(2.859841, 2.3099751)
-polygon = PackedVector2Array(631.8533, 5.1948547, 635.69965, 122.94504, -63.639896, 122.512115, -63.290226, 5.1948547, 287.07886, 5.1948547, 287.42853, 26.407196, 347.22208, 25.974304, 347.22208, 1.7315979)
+polygon = PackedVector2Array(1320.353, 4.3290405, 1326.9967, 125.10956, -63.639896, 122.512115, -63.290226, 5.1948547, 234.27875, 8.225189, 233.22974, 23.376862, 347.22208, 25.974304, 347.22208, 1.7315979, 526.253, -48.91829, 572.0597, 75.32547)
 script = ExtResource("6_v221m")
 
 [node name="Polygon2D" type="Polygon2D" parent="Floor/CollisionPolygon2D" unique_id=358359889]
@@ -114,40 +109,100 @@ color = Color(0, 0, 0, 1)
 
 [node name="Door" parent="." unique_id=4200 instance=ExtResource("8_door1")]
 z_index = -5
-position = Vector2(472, 400)
+position = Vector2(1230, 606)
 
 [node name="Door2" parent="." unique_id=4202 instance=ExtResource("8_door1")]
 z_index = -5
-position = Vector2(1280, 560)
+position = Vector2(2242, 442)
 target_number = 6
 
 [node name="RocketJump" parent="." unique_id=4203 instance=ExtResource("11_rocket")]
-position = Vector2(856, 688)
+position = Vector2(621, 682)
 target_number = 7
 
+[node name="RocketJump2" parent="." unique_id=4204 instance=ExtResource("11_rocket")]
+position = Vector2(1727, 840)
+target_number = 8
+
 [node name="CompleteMarker" type="Node2D" parent="." unique_id=4201]
-position = Vector2(1314, 647)
+position = Vector2(3722, 603)
 script = ExtResource("9_complete1")
 
 [node name="Character" parent="." unique_id=1031860787 instance=ExtResource("2_oh7vw")]
 position = Vector2(158, 653)
+floor_snap_length = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="Character" unique_id=3200]
 offset = Vector2(0, -240)
 limit_left = 0
 limit_top = 0
+limit_bottom = 1000
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.6667
-drag_top_margin = 1.0
+drag_top_margin = 0.3
 drag_right_margin = 0.0
-drag_bottom_margin = 1.0
+drag_bottom_margin = 0.05
 
 [node name="Spike2" parent="." unique_id=781719005 instance=ExtResource("10_thcrw")]
 z_index = -5
 position = Vector2(929, 774)
+
+[node name="Spike11" parent="." unique_id=1737650901 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(765, 779)
+
+[node name="Spike13" parent="." unique_id=1216556508 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(872, 778)
+
+[node name="Spike14" parent="." unique_id=447958747 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(729, 778)
+
+[node name="Spike12" parent="." unique_id=302227663 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(817, 776)
+
+[node name="Spike6" parent="." unique_id=279471867 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1490, 469)
+rotation = 3.1415927
+
+[node name="Spike7" parent="." unique_id=574984640 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1436, 470)
+rotation = 3.1415927
+
+[node name="Spike8" parent="." unique_id=384555898 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1632, 648)
+
+[node name="Spike9" parent="." unique_id=285538025 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1746, 668)
+
+[node name="Spike15" parent="." unique_id=2121048309 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1808, 876)
+
+[node name="Spike16" parent="." unique_id=285875795 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1865, 876)
+
+[node name="Spike17" parent="." unique_id=1789846607 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1921, 868)
+
+[node name="Spike18" parent="." unique_id=1690784702 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1983, 859)
+
+[node name="Spike10" parent="." unique_id=825702673 instance=ExtResource("10_thcrw")]
+z_index = -5
+position = Vector2(1656, 764)
 
 [node name="Spike3" parent="." unique_id=1294493740 instance=ExtResource("10_thcrw")]
 z_index = -5

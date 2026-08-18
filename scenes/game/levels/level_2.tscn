@@ -1,8 +1,10 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b2e0i506oqhu8"]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_x2ody"]
+[ext_resource type="AudioStream" uid="uid://bujqx2m5wkne6" path="res://assets/sound/Split Jack Music.mp3" id="4_x2ody"]
+[ext_resource type="Script" uid="uid://ctk4fd0bw3pix" path="res://scenes/game/audio_stream_player_2d.gd" id="5_eom8k"]
 [ext_resource type="PackedScene" uid="uid://gygq7y0315dn" path="res://scenes/game/levels/hacking/hacking_2.tscn" id="6_hack2"]
-[ext_resource type="PackedScene" path="res://scenes/game/levels/platform/platform_level_2.tscn" id="7_demo2"]
+[ext_resource type="PackedScene" uid="uid://d0tfug6jcbhgf" path="res://scenes/game/levels/platform/platform_level_2.tscn" id="7_demo2"]
 
 [node name="Level2" type="Control" unique_id=99694805]
 layout_mode = 3
@@ -12,7 +14,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x2ody")
-next_level_path = "res://scenes/game/levels/level_3.tscn"
 
 [node name="HackingViewportContainer" type="SubViewportContainer" parent="." unique_id=463490265]
 layout_mode = 0
@@ -21,6 +22,7 @@ offset_bottom = 720.0
 
 [node name="SubViewport" type="SubViewport" parent="HackingViewportContainer" unique_id=640415195]
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(500, 720)
 render_target_update_mode = 4
 
@@ -34,6 +36,7 @@ offset_bottom = 720.0
 
 [node name="SubViewport" type="SubViewport" parent="PlatformViewportContainer" unique_id=149828992]
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(780, 720)
 render_target_update_mode = 4
 
@@ -60,6 +63,7 @@ vertical_alignment = 1
 
 [node name="WinLoseOverlay" type="HBoxContainer" parent="." unique_id=100201]
 layout_mode = 1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -180.0
@@ -78,6 +82,11 @@ text = "Win"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Lose"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1894732175]
+stream = ExtResource("4_x2ody")
+volume_db = 1.084
+script = ExtResource("5_eom8k")
 
 [connection signal="pressed" from="WinLoseOverlay/WinButton" to="." method="_on_win_button_pressed"]
 [connection signal="pressed" from="WinLoseOverlay/LoseButton" to="." method="_on_lose_button_pressed"]

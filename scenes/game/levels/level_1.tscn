@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b6w0q3vd85uqv"]
 
 [ext_resource type="Script" uid="uid://b53gxiwigdwhd" path="res://scenes/game/levels/level.gd" id="1_kdlgo"]
+[ext_resource type="AudioStream" uid="uid://bujqx2m5wkne6" path="res://assets/sound/Split Jack Music.mp3" id="4_kdlgo"]
+[ext_resource type="Script" uid="uid://ctk4fd0bw3pix" path="res://scenes/game/audio_stream_player_2d.gd" id="5_1bryu"]
 [ext_resource type="PackedScene" uid="uid://cgum6hao5k8do" path="res://scenes/game/levels/hacking/hacking_1.tscn" id="6_hack1"]
 [ext_resource type="PackedScene" uid="uid://bpvkeb7n6e4pn" path="res://scenes/game/levels/platform/platform_level_1.tscn" id="7_demo1"]
 
@@ -21,6 +23,7 @@ offset_bottom = 720.0
 
 [node name="SubViewport" type="SubViewport" parent="HackingViewportContainer" unique_id=640415195]
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(500, 720)
 render_target_update_mode = 4
 
@@ -34,6 +37,7 @@ offset_bottom = 720.0
 
 [node name="SubViewport" type="SubViewport" parent="PlatformViewportContainer" unique_id=149828992]
 handle_input_locally = false
+audio_listener_enable_2d = true
 size = Vector2i(780, 720)
 render_target_update_mode = 4
 
@@ -79,6 +83,11 @@ text = "Win"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Lose"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1804399392]
+stream = ExtResource("4_kdlgo")
+volume_db = 3.251
+script = ExtResource("5_1bryu")
 
 [connection signal="pressed" from="WinLoseOverlay/WinButton" to="." method="_on_win_button_pressed"]
 [connection signal="pressed" from="WinLoseOverlay/LoseButton" to="." method="_on_lose_button_pressed"]

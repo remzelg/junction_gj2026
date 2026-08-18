@@ -3,11 +3,14 @@ class_name HackingScene
 
 signal node_triggered(number: int)
 signal all_nodes_triggered
+## Emitted when a rocket-marker node is hacked-cursor-triggered, so level.gd
+## can detonate the matching physical RocketJump mine.
+signal rocket_triggered(number: int)
 
 ## Generic graph engine: layout data (positions, connections, targets) is
-## supplied by a per-level subclass (see hacking_1.gd / hacking_2.gd /
-## hacking_3.gd) instead of being hardcoded here, so each level can use its
-## own — possibly asymmetric — formation of nodes instead of a fixed grid.
+## supplied by a per-level subclass (see hacking_1.gd / hacking_2.gd)
+## instead of being hardcoded here, so each level can use its own —
+## possibly asymmetric — formation of nodes instead of a fixed grid.
 
 ## Local-space position of each graph node, indexed 0..N-1.
 var node_positions: Array[Vector2] = []
@@ -19,9 +22,10 @@ var target_numbers: Dictionary = {}
 ## node_positions index where the hacking indicator spawns.
 var start_index: int = 0
 ## node_positions index -> displayed number, for rocket-jump marker nodes.
-## Mirrors target_numbers, but these aren't hackable and don't count toward
-## completion — each is a numbered, proximity-tinted marker for a matching
-## RocketJump mine (by its own target_number) in the platform level.
+## Mirrors target_numbers, but these are triggered rather than hacked (see
+## HackingGraphNode.can_trigger) and don't count toward completion — each is
+## a numbered, proximity-tinted marker for a matching RocketJump mine (by its
+## own target_number) in the platform level.
 var rocket_numbers: Dictionary = {}
 
 @onready var status_label: Label = $UI/StatusLabel
@@ -33,7 +37,6 @@ var _adjacency: Dictionary = {} # node index -> Array[int] of connected neighbor
 
 func _ready() -> void:
 	_build_graph()
-	update_status(0)
 	queue_redraw()
 
 func _build_graph() -> void:
@@ -127,9 +130,3 @@ func neighbor_index(index: int, direction: Vector2) -> int:
 
 func direction_valid(index: int, direction: Vector2) -> bool:
 	return direction != Vector2.ZERO and neighbor_index(index, direction) != -1
-
-func update_status(hacked_count: int) -> void:
-	if hacked_count >= target_count:
-		status_label.text = "All nodes hacked! (%d/%d)" % [hacked_count, target_count]
-	else:
-		status_label.text = "Hacked %d/%d — move onto a red node and press Space" % [hacked_count, target_count]

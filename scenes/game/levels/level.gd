@@ -25,11 +25,15 @@ func _on_win_button_pressed() -> void:
 # hacked. Once hacked, the door opens when the player gets within
 # DOOR_OPEN_DISTANCE of it. A level can have any number of doors, or none.
 #
-# A level's rocket-jump mines work the same way as doors for pairing and
-# highlighting: each RocketJump is paired (via its own target_number) with a
-# hacking-graph rocket-marker node, and highlights the same way a door does.
-# Unlike a door, hacking a rocket marker isn't possible — the physical mine
-# handles its own triggering independently.
+# A level's rocket-jump mines work the same way as doors for pairing,
+# highlighting, and gating: each RocketJump is paired (via its own
+# target_number) with a hacking-graph rocket-marker node, which only turns on
+# (and becomes triggerable — see HackingGraphNode.can_trigger) while the
+# player is physically within HIGHLIGHT_DISTANCE of the mine, same as a door.
+# Unlike a door, the mine can't be triggered physically — with the player in
+# range, moving the hacking cursor onto the marker node and pressing Space
+# there is what actually detonates it (see RocketJump.trigger and
+# HackingScene.rocket_triggered), so both proximities are required at once.
 const DOOR_OPEN_DISTANCE := 80.0
 const HIGHLIGHT_DISTANCE := 150.0
 
@@ -45,6 +49,7 @@ var _rocket_links: Array = [] # [{node: RocketJump, graph_node: HackingGraphNode
 func _ready() -> void:
 	if hacking_scene:
 		hacking_scene.all_nodes_triggered.connect(_on_all_nodes_triggered)
+		hacking_scene.rocket_triggered.connect(_on_rocket_triggered)
 	if player:
 		player.lost_level.connect(_on_player_lost_level)
 	_collect_doors()
@@ -76,6 +81,13 @@ func _on_player_lost_level() -> void:
 func _on_all_nodes_triggered() -> void:
 	if complete_marker:
 		complete_marker.show_marker()
+
+func _on_rocket_triggered(number: int) -> void:
+	for rocket_link in _rocket_links:
+		var node: RocketJump = rocket_link["node"]
+		if node.target_number == number:
+			node.trigger()
+			return
 
 func _process(_delta: float) -> void:
 	if player:

@@ -77,22 +77,40 @@ script = ExtResource("6_v221m")
 [node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D" unique_id=1751075990]
 color = Color(0.64705884, 0.16470589, 0.16470589, 1)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Building/CollisionPolygon2D" unique_id=1885504990]
-position = Vector2(547.5829, -347.62274)
-scale = Vector2(2.859841, 2.3099751)
-polygon = PackedVector2Array(27.510513, 97.451546, 36.68068, 146.73955, 37.90338, 238.19409, 19.685303, 237.25703, 19.07396, 146.17732)
-script = ExtResource("6_v221m")
-
-[node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D/CollisionPolygon2D" unique_id=1573743054]
-color = Color(0.64705884, 0.16470589, 0.16470589, 1)
-
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Building" unique_id=573161881]
-position = Vector2(3783.9998, 100)
+position = Vector2(3441, 72)
 scale = Vector2(2.859841, 2.3099751)
 polygon = PackedVector2Array(40, 0, 40, 0, 39.163013, 234.20166, -1.0490093, 234.20166, 0, 8)
 script = ExtResource("6_v221m")
 
 [node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D2" unique_id=104257376]
+color = Color(0.64705884, 0.16470589, 0.16470589, 1)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Building" unique_id=1885504990]
+position = Vector2(1566, -802.9999)
+scale = Vector2(8.178691, 5.335985)
+polygon = PackedVector2Array(27.510513, 97.451546, 36.68068, 146.73955, 37.90338, 238.19409, 19.685303, 237.25703, 19.07396, 146.17732)
+script = ExtResource("6_v221m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D3" unique_id=1573743054]
+color = Color(0.64705884, 0.16470589, 0.16470589, 1)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Building" unique_id=620739201]
+position = Vector2(2296.0002, -620)
+scale = Vector2(8.178691, 5.335985)
+polygon = PackedVector2Array(40.593292, 178.41129, 48.051697, 196.40234, 60.889954, 238.9437, 38.636993, 240.81776, 16.995361, 240.25554, 33.134888, 193.02902)
+script = ExtResource("6_v221m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D4" unique_id=823792996]
+color = Color(0.64705884, 0.16470589, 0.16470589, 1)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Building" unique_id=380536865]
+position = Vector2(2667.0002, -807.00006)
+scale = Vector2(8.178691, 5.335985)
+polygon = PackedVector2Array(37.658844, 228.44893, 55.999176, 228.26152, 56.48825, 241.00519, 37.53656, 240.25555, 16.995361, 240.25554, 17.117645, 228.82373)
+script = ExtResource("6_v221m")
+
+[node name="Polygon2D" type="Polygon2D" parent="Building/CollisionPolygon2D5" unique_id=172885356]
 color = Color(0.64705884, 0.16470589, 0.16470589, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=550201616]
@@ -101,7 +119,7 @@ position = Vector2(0, 176)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Floor" unique_id=309736704]
 position = Vector2(87, 524)
 scale = Vector2(2.859841, 2.3099751)
-polygon = PackedVector2Array(1320.353, 4.3290405, 1326.9967, 125.10956, -63.639896, 122.512115, -63.290226, 5.1948547, 234.27875, 8.225189, 233.22974, 23.376862, 347.22208, 25.974304, 347.22208, 1.7315979, 526.253, -48.91829, 572.0597, 75.32547)
+polygon = PackedVector2Array(1320.353, 4.3290405, 1326.9967, 125.10956, -63.639896, 122.512115, -63.290226, 5.1948547, 234.27875, 8.225189, 233.22974, 23.376862, 347.22208, 25.974304, 347.22208, 1.7315979, 528.7007, -0.8658142, 528.00134, 15.584564)
 script = ExtResource("6_v221m")
 
 [node name="Polygon2D" type="Polygon2D" parent="Floor/CollisionPolygon2D" unique_id=358359889]
@@ -109,11 +127,11 @@ color = Color(0, 0, 0, 1)
 
 [node name="Door" parent="." unique_id=4200 instance=ExtResource("8_door1")]
 z_index = -5
-position = Vector2(1230, 606)
+position = Vector2(1723, 643)
 
 [node name="Door2" parent="." unique_id=4202 instance=ExtResource("8_door1")]
 z_index = -5
-position = Vector2(2242, 442)
+position = Vector2(3093, 496)
 target_number = 6
 
 [node name="RocketJump" parent="." unique_id=4203 instance=ExtResource("11_rocket")]
@@ -121,11 +139,11 @@ position = Vector2(621, 682)
 target_number = 7
 
 [node name="RocketJump2" parent="." unique_id=4204 instance=ExtResource("11_rocket")]
-position = Vector2(1727, 840)
+position = Vector2(2371, 683)
 target_number = 8
 
 [node name="CompleteMarker" type="Node2D" parent="." unique_id=4201]
-position = Vector2(3722, 603)
+position = Vector2(3393, 612)
 script = ExtResource("9_complete1")
 
 [node name="Character" parent="." unique_id=1031860787 instance=ExtResource("2_oh7vw")]
@@ -168,41 +186,32 @@ position = Vector2(817, 776)
 
 [node name="Spike6" parent="." unique_id=279471867 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1490, 469)
-rotation = 3.1415927
+position = Vector2(1627, 729)
 
 [node name="Spike7" parent="." unique_id=574984640 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1436, 470)
-rotation = 3.1415927
-
-[node name="Spike8" parent="." unique_id=384555898 instance=ExtResource("10_thcrw")]
-z_index = -5
-position = Vector2(1632, 648)
-
-[node name="Spike9" parent="." unique_id=285538025 instance=ExtResource("10_thcrw")]
-z_index = -5
-position = Vector2(1746, 668)
+position = Vector2(1684, 741)
 
 [node name="Spike15" parent="." unique_id=2121048309 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1808, 876)
+position = Vector2(2825, 730)
 
 [node name="Spike16" parent="." unique_id=285875795 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1865, 876)
+position = Vector2(2768, 725)
 
 [node name="Spike17" parent="." unique_id=1789846607 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1921, 868)
+position = Vector2(2613, 322)
+rotation = 3.1415927
 
 [node name="Spike18" parent="." unique_id=1690784702 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1983, 859)
+position = Vector2(2942, 724)
 
 [node name="Spike10" parent="." unique_id=825702673 instance=ExtResource("10_thcrw")]
 z_index = -5
-position = Vector2(1656, 764)
+position = Vector2(2885, 731)
 
 [node name="Spike3" parent="." unique_id=1294493740 instance=ExtResource("10_thcrw")]
 z_index = -5

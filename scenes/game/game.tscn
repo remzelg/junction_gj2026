@@ -23,7 +23,6 @@ script = ExtResource("4_kp23o")
 level_loader = NodePath("../LevelLoader")
 scene_lister = NodePath("SceneLister")
 main_menu_scene_path = "res://scenes/menus/main_menu/main_menu.tscn"
-ending_scene_path = "res://scenes/end_credits/end_credits.tscn"
 game_won_scene = ExtResource("5_5jirj")
 level_won_scene = ExtResource("7_ftsea")
 

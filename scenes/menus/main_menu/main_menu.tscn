@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_game_template/base/nodes/menus/main_menu/main_menu.tscn" id="1_peecx"]
 [ext_resource type="Script" uid="uid://cygs0qeabr5u6" path="res://scenes/menus/main_menu/main_menu.gd" id="2_ub2bi"]
 [ext_resource type="PackedScene" uid="uid://b8doiervc4q6d" path="res://scenes/windows/main_menu_options_window.tscn" id="3_x31ro"]
-[ext_resource type="PackedScene" uid="uid://bu5rg6scbsyqs" path="res://scenes/windows/main_menu_credits_window.tscn" id="4_0jpat"]
 [ext_resource type="Texture2D" uid="uid://c0rcaxqdph2xn" path="res://assets/backgrounds/menu_backdrop.png" id="5_ub2bi"]
 [ext_resource type="PackedScene" uid="uid://d4k4qbchsjvnb" path="res://scenes/game/levels/platform/player.tscn" id="6_x31ro"]
 
@@ -14,7 +13,6 @@ size = Vector2(20, 16)
 script = ExtResource("2_ub2bi")
 game_scene_path = "res://scenes/game/game.tscn"
 options_packed_scene = ExtResource("3_x31ro")
-credits_packed_scene = ExtResource("4_0jpat")
 
 [node name="ColorRect" type="ColorRect" parent="." index="0" unique_id=1521418511]
 layout_mode = 0
